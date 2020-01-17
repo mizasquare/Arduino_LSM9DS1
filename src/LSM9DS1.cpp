@@ -69,8 +69,8 @@ int LSM9DS1Class::begin()
     return 0;
   }
 
-  writeRegister(LSM9DS1_ADDRESS, LSM9DS1_CTRL_REG1_G, 0x78); // 119 Hz, 2000 dps, 16 Hz BW
-  writeRegister(LSM9DS1_ADDRESS, LSM9DS1_CTRL_REG6_XL, 0x70); // 119 Hz, 4G
+  writeRegister(LSM9DS1_ADDRESS, LSM9DS1_CTRL_REG1_G, 0xA0); // 476 Hz, 2000 dps, 21 Hz BW?
+  writeRegister(LSM9DS1_ADDRESS, LSM9DS1_CTRL_REG6_XL, 0xB8); // 476 Hz, 8G
 
   writeRegister(LSM9DS1_ADDRESS_M, LSM9DS1_CTRL_REG1_M, 0xb4); // Temperature compensation enable, medium performance, 20 Hz
   writeRegister(LSM9DS1_ADDRESS_M, LSM9DS1_CTRL_REG2_M, 0x00); // 4 Gauss
@@ -100,9 +100,9 @@ int LSM9DS1Class::readAcceleration(float& x, float& y, float& z)
     return 0;
   }
 
-  x = data[0] * 4.0 / 32768.0;
-  y = data[1] * 4.0 / 32768.0;
-  z = data[2] * 4.0 / 32768.0;
+  x = data[0] * 8.00000 / 32768.00000;
+  y = data[1] * 8.00000 / 32768.00000;
+  z = data[2] * 8.00000 / 32768.00000;
 
   return 1;
 }
@@ -118,7 +118,7 @@ int LSM9DS1Class::accelerationAvailable()
 
 float LSM9DS1Class::accelerationSampleRate()
 {
-  return 119.0F;
+  return 476.0F;
 }
 
 int LSM9DS1Class::readGyroscope(float& x, float& y, float& z)
@@ -133,9 +133,9 @@ int LSM9DS1Class::readGyroscope(float& x, float& y, float& z)
     return 0;
   }
 
-  x = data[0] * 2000.0 / 32768.0;
-  y = data[1] * 2000.0 / 32768.0;
-  z = data[2] * 2000.0 / 32768.0;
+  x = data[0] * 2000.00000 / 32768.00000;
+  y = data[1] * 2000.00000 / 32768.00000;
+  z = data[2] * 2000.00000 / 32768.00000;
 
   return 1;
 }
@@ -151,7 +151,7 @@ int LSM9DS1Class::gyroscopeAvailable()
 
 float LSM9DS1Class::gyroscopeSampleRate()
 {
-  return 119.0F;
+  return 476.0F;
 }
 
 int LSM9DS1Class::readMagneticField(float& x, float& y, float& z)
